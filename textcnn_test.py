@@ -36,7 +36,7 @@ for y_p in y_pred:
     y_pred_list.append(a)
 y_pred = np.array(y_pred_list)
 
-rep = metrics.classification_report(y_test,y_pred,digits=4)
+rep = metrics.classification_report(y_test,y_pred,digits=3)
 print(rep)
 with open('result.txt','w') as f:
     f.write(rep)
