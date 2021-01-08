@@ -21,8 +21,8 @@ from tqdm import tqdm
 wv_model = gensim.models.KeyedVectors.load_word2vec_format('../GoogleNews-vectors-negative300.bin', binary=True)
 
 max_len = 64
-traindata = '../data/yahootopic/train_pu_half_v1.txt'
-testdata = '../data/yahootopic/test.txt'
+traindata = '../dataset/choice_train_data.csv'
+testdata = '../data/dbpedia/dbpedia_csv/test.csv'
 testclass = 1 # 10 or 1 or 0
 
 # パディングとベクトル化
@@ -55,43 +55,31 @@ def chenge_text(text):
 # 選択した学習データの読み込み
 x_train = []
 y_train = []
-with open(traindata, 'r') as f:
-    read = f.read().splitlines()
+with open(traindata, 'r', encoding='utf-8') as f:
+    read = csv.reader(f)
     for row in read:
-        row = row.split('\t')
         x_train.append(chenge_text(row[1]))
-        y_train.append(int(int(row[0])/2))
+        y_train.append(int(row[0]))
 
 # テストデータの作成
 # test.txtをv0とv1に分割。
 x_test = []
 y_test = []
-x_test_0 = []
-y_test_0 = []
-x_test_1 = []
-y_test_1 = []
+with open('../data/dbpedia/dbpedia_csv/test.csv','r',encoding='utf-8') as f:
+    texts = csv.reader(f)
+    for row in texts:
+        text_stock = []
+        text = row[2][1:].replace('(',')').split(')')
+        for i,t in enumerate(text):
+            if i % 2 == 0:
+                text_stock.append(t)
+        text = ''.join(text_stock)
+        text = chenge_text(text)
+        text = ' '.join([x for x in text.split(' ') if x not in row[1].split(' ')])
+        text = text.replace('  ',' ')
+        y_test.append(int(row[0])-1)
+        x_test.append(text)
 
-with open(testdata,'r', encoding='utf-8') as f:
-    texts = f.read().splitlines()
-    for text in texts:
-        text = text.split('\t')
-        x_test.append(chenge_text(text[1]))
-        y_test.append(int(text[0]))
-        if int(text[0])%2 == 0:
-            x_test_0.append(chenge_text(text[1]))
-            y_test_0.append(int(text[0])/2)
-        elif int(text[0])%2 == 1:
-            x_test_1.append(chenge_text(text[1]))
-            y_test_1.append(int(int(text[0])/2))
-
-if testclass == 10:
-    pass
-elif testclass == 0:
-    x_test = x_test_0
-    y_test = y_test_0
-elif testclass == 1:
-    x_test = x_test_1
-    y_test = y_test_1
 
 x_train = pad_vec(x_train,max_len)
 y_train = np_utils.to_categorical(y_train)
@@ -100,6 +88,5 @@ y_test = np_utils.to_categorical(y_test)
 
 np.save('../dataset/train/x_train.npy',x_train)
 np.save('../dataset/train/y_train.npy',y_train)
-
 np.save('../dataset/test/x_test.npy',x_test)
 np.save('../dataset/test/y_test.npy',y_test)

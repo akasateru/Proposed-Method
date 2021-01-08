@@ -12,7 +12,7 @@ from sklearn import metrics
 from sklearn.metrics import recall_score, precision_score, f1_score, accuracy_score
 
 # 要確認
-units = 5 #クラス数
+units = 14 #クラス数
 batch_size = 4
 
 model = load_model('testcnn.h5')
@@ -38,5 +38,5 @@ y_pred = np.array(y_pred_list)
 
 rep = metrics.classification_report(y_test,y_pred,digits=3)
 print(rep)
-with open('result.txt','w') as f:
+with open('result.txt','w',encoding='utf-8') as f:
     f.write(rep)
