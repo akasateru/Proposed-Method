@@ -19,5 +19,5 @@
 - パラメータ:
     - max_len = 128
     - units = 14           
-    - epocks = 20
+    - epochs = 20
     - batch_size = 4
