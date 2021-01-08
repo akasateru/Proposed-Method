@@ -50,7 +50,7 @@ with open('../data/dbpedia/dbpedia_csv/classes.csv','r',encoding='utf-8',errors=
     x = csv.reader(f)
     target_class = []
     for row in x:
-        target_class.append(docvec(row[1],max_len))
+        target_class.append(docvec(row[0],max_len))
 
 # cos類似度を基に情報源領域文書を対象領域クラスへ分類
 # 情報源領域文書の対象領域クラスへの振り分けとcos類似度の差を計算

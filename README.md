@@ -1,7 +1,7 @@
 - ファイル名:
-    - Proposed method 4.0
+    - Proposed method 2.0
 - 説明:
-    - wordnetを使用する
+    - クラス名
 - 情報源領域:
     - 20news:全文書
     - dbpedia:train.csv, test.csv
