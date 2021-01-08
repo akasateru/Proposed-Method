@@ -13,7 +13,7 @@ from sklearn.metrics import recall_score, precision_score, f1_score, accuracy_sc
 
 # 要確認
 units = 5 #クラス数
-batch_size = 32
+batch_size = 4
 
 model = load_model('testcnn.h5')
 

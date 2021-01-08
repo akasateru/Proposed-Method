@@ -13,10 +13,10 @@ from sklearn.metrics import recall_score, precision_score, f1_score, accuracy_sc
 import keras
 
 # 要確認
-max_len = 128
+max_len = 64
 units = 5 # 対象領域のクラス数
 epochs = 20
-batch_size = 8
+batch_size = 4
 filter_sizes = [3,4,5]
 
 inputs = Input(shape=(max_len,300),dtype='float32')

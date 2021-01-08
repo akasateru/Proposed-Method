@@ -20,8 +20,8 @@ from tqdm import tqdm
 
 wv_model = gensim.models.KeyedVectors.load_word2vec_format('../GoogleNews-vectors-negative300.bin', binary=True)
 
-max_len = 128
-traindata = '../data/yahootopic/train_pu_half_v0.txt'
+max_len = 64
+traindata = '../data/yahootopic/train_pu_half_v1.txt'
 testdata = '../data/yahootopic/test.txt'
 testclass = 1 # 10 or 1 or 0
 
