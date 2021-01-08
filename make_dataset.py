@@ -27,6 +27,7 @@ config = json.load(json_file)
 max_len = config['max_len']
 traindata = config['traindata']
 testdata = config['testdata']
+class_explanation = config['class_explanation']
 
 # パディングとベクトル化
 def pad_vec(x_list, max_len):
@@ -62,7 +63,7 @@ with open(traindata, 'r', encoding='utf-8') as f:
     read = csv.reader(f)
     for row in read:
         x_train.append(chenge_text(row[1]))
-        y_train.append(int(row[0]))
+        y_train.append(int(row[class_explanation]))
 
 # テストデータの作成
 # test.txtをv0とv1に分割。
