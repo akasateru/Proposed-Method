@@ -17,13 +17,16 @@ import gensim
 from gensim.utils import tokenize
 from keras.utils import np_utils
 from tqdm import tqdm
+import json
 
 wv_model = gensim.models.KeyedVectors.load_word2vec_format('../GoogleNews-vectors-negative300.bin', binary=True)
 
-max_len = 64
-traindata = '../dataset/choice_train_data.csv'
-testdata = '../data/dbpedia/dbpedia_csv/test.csv'
-testclass = 1 # 10 or 1 or 0
+json_file = open('config.json','r')
+config = json.load(json_file)
+
+max_len = config['max_len']
+traindata = config['traindata']
+testdata = config['testdata']
 
 # パディングとベクトル化
 def pad_vec(x_list, max_len):
@@ -65,7 +68,7 @@ with open(traindata, 'r', encoding='utf-8') as f:
 # test.txtをv0とv1に分割。
 x_test = []
 y_test = []
-with open('../data/dbpedia/dbpedia_csv/test.csv','r',encoding='utf-8') as f:
+with open(testdata,'r',encoding='utf-8') as f:
     texts = csv.reader(f)
     for row in texts:
         text_stock = []
@@ -79,7 +82,6 @@ with open('../data/dbpedia/dbpedia_csv/test.csv','r',encoding='utf-8') as f:
         text = text.replace('  ',' ')
         y_test.append(int(row[0])-1)
         x_test.append(text)
-
 
 x_train = pad_vec(x_train,max_len)
 y_train = np_utils.to_categorical(y_train)

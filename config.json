@@ -1,0 +1,10 @@
+{
+    "max_len":128,
+    "units":14,
+    "epochs":20,
+    "batch_size":4,
+    "diff_threshold":0.05,
+    "min_count":3000,
+    "traindata":"../dataset/choice_train_data.csv",
+    "testdata":"../data/dbpedia/dbpedia_csv/test.csv"
+}

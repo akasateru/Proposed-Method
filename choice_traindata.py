@@ -10,14 +10,19 @@ import os
 import gensim
 import numpy as np
 from tqdm import tqdm
+import json
 
 # 文章のベクトルの平均
 model = gensim.models.KeyedVectors.load_word2vec_format('../GoogleNews-vectors-negative300.bin', binary=True)
 
-def docvec(row):
+json_file = open('config.json','r')
+config = json.load(json_file)
 
-    max_len = 128
+max_len = config['max_len']
+diff_threshold = config['diff_threshold']
+min_count = config['min_count']
 
+def docvec(row,max_len):
     feature_vec = np.zeros((300,),dtype='float32') 
     row = row.replace("\n"," ")
     words = row.split(" ") 
@@ -41,19 +46,14 @@ with open('../dataset/source.txt','r') as f:
     source_text = f.read().splitlines()
 
 # 対象領域のクラス情報の読み込み
-with open('../data/dbpedia/dbpedia_csv/classes.txt','r',encoding='utf-8',errors='ignore')as f:
-    x = f.read().splitlines()
+with open('../data/dbpedia/dbpedia_csv/classes.csv','r',encoding='utf-8',errors='ignore')as f:
+    x = csv.reader(f)
     target_class = []
     for row in x:
-        target_class.append(docvec(row))
+        target_class.append(docvec(row[1],max_len))
 
 # cos類似度を基に情報源領域文書を対象領域クラスへ分類
-
-# 要確認
-diff_threshold = 0.05
-min_count = 3000
-
-    # 情報源領域文書の対象領域クラスへの振り分けとcos類似度の差を計算
+# 情報源領域文書の対象領域クラスへの振り分けとcos類似度の差を計算
 choice_list = []
 diff_list = []
 stack_i_list = []

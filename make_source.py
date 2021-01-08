@@ -10,6 +10,7 @@ from sklearn.model_selection import train_test_split
 import re
 import string
 from tqdm import tqdm
+import json
 
 # 不要語削除
 def chenge_text(text):
@@ -21,7 +22,9 @@ def chenge_text(text):
 
 model = gensim.models.KeyedVectors.load_word2vec_format('../GoogleNews-vectors-negative300.bin', binary=True)
 
-max_len = 128
+json_file = open('config.json', 'r')
+config = json.load(json_file)
+max_len = config['max_len']
 
 def docvec(row):
     feature_vec = np.zeros((300,),dtype='float32') 
@@ -68,6 +71,7 @@ def news20():
     return vec_list_20news, text_list_20news
 
 def dbpedia():
+    #train.csv
     with open('../data'+os.sep+'dbpedia'+os.sep+'dbpedia_csv'+os.sep+'train.csv','r',encoding='utf-8') as f:
         reader = csv.reader(f)
         vec_list_dbpedia = []
@@ -87,6 +91,7 @@ def dbpedia():
             vec_list_dbpedia.append(docvec(text))
             text_list_dbpedia.append(text)
 
+    #test.csv
     with open('../data'+os.sep+'dbpedia'+os.sep+'dbpedia_csv'+os.sep+'test.csv','r',encoding='utf-8') as f:
         reader = csv.reader(f)
         l = len(list(reader))

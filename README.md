@@ -1,14 +1,14 @@
 - ファイル名:
-    - Proposed method 3.0
+    - Proposed method 4.0
 - 説明:
-    - 情報源領域にdbpedia/test.csvを追加
+    - wordnetを使用する
 - 情報源領域:
     - 20news:全文書
     - dbpedia:train.csv, test.csv
     - reuter:全文書
     - yahootopic:train_pu_half_v0.txt, train_pu_half_v1.txt                 
 - 対象領域のクラス情報:   
-    - クラス名
+    - wordnet
 - 学習データ選択方法:
     - ank1-rank2 > 0.05
     - 各クラス文書数：3000                
@@ -19,5 +19,5 @@
 - パラメータ:
     - max_len = 128
     - units = 14           
-    - epocks = 20
+    - epochs = 20
     - batch_size = 4

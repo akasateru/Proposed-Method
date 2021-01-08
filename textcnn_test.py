@@ -10,10 +10,13 @@ import csv
 import os
 from sklearn import metrics
 from sklearn.metrics import recall_score, precision_score, f1_score, accuracy_score
+import json
 
 # 要確認
-units = 14 #クラス数
-batch_size = 4
+json_file = open('config.json','r')
+config = json.load(json_file)
+units =  config['units'] #クラス数
+batch_size = config['batch_size']
 
 model = load_model('testcnn.h5')
 

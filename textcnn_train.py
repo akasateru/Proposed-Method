@@ -11,18 +11,22 @@ import os
 from sklearn import metrics
 from sklearn.metrics import recall_score, precision_score, f1_score, accuracy_score
 import keras
+import json
 
 # 要確認
-max_len = 128
-units = 14 # 対象領域のクラス数
-epochs = 20
-batch_size = 4
+json_file = open('config.json','r')
+config = json.load(json_file)
+max_len = config['max_len']
+units = config['units'] # 対象領域のクラス数
+epochs = config['epochs']
+batch_size = config['batch_size']
+filters = 100
 filter_sizes = [3,4,5]
 
 inputs = Input(shape=(max_len,300),dtype='float32')
-conv1 = Conv1D(filters=100, kernel_size=filter_sizes[0], kernel_initializer='normal', activation='relu')(inputs)
-conv2 = Conv1D(filters=100, kernel_size=filter_sizes[1], kernel_initializer='normal', activation='relu')(inputs)
-conv3 = Conv1D(filters=100, kernel_size=filter_sizes[2], kernel_initializer='normal', activation='relu')(inputs)
+conv1 = Conv1D(filters=filters, kernel_size=filter_sizes[0], kernel_initializer='normal', activation='relu')(inputs)
+conv2 = Conv1D(filters=filters, kernel_size=filter_sizes[1], kernel_initializer='normal', activation='relu')(inputs)
+conv3 = Conv1D(filters=filters, kernel_size=filter_sizes[2], kernel_initializer='normal', activation='relu')(inputs)
 pool1 = MaxPooling1D(pool_size=int(conv1.shape[1]),strides=1)(conv1)
 pool2 = MaxPooling1D(pool_size=int(conv2.shape[1]),strides=1)(conv2)
 pool3 = MaxPooling1D(pool_size=int(conv3.shape[1]),strides=1)(conv3)
