@@ -3,10 +3,10 @@
 - 説明:
     - 提案手法
 - 情報源領域:
-    - 20news:     全文書
-    - dbpedia:    train.csv
-    - reuter:     全文書
-    - yahootopic: train_pu_half_v0.txt, train_pu_half_v1.txt                 
+    - 20news:全文書
+    - dbpedia:train.csv
+    - reuter:全文書
+    - yahootopic:train_pu_half_v0.txt, train_pu_half_v1.txt                 
 - 対象領域のクラス情報:   
     - クラス名
 - 学習データ選択方法:
@@ -19,5 +19,5 @@
 - パラメータ:
     - max_len = 128
     - units = 14           
-    - epocks = 30
+    - epocks = 20
     - batch_size = 4
