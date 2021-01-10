@@ -27,7 +27,6 @@ config = json.load(json_file)
 max_len = config['max_len']
 traindata = config['traindata']
 testdata = config['testdata']
-class_explanation = config['class_explanation']
 
 # パディングとベクトル化
 def pad_vec(x_list, max_len):
@@ -35,13 +34,14 @@ def pad_vec(x_list, max_len):
     x = []
     for doc in tqdm(x_list):
         vec_list = []
+        doc = doc.split(' ')
         for word in doc:
             if len(vec_list) < max_len:
                 try:
                     vec = wv_model[word]
+                    vec_list.append(vec)
                 except KeyError:
                     pass
-                vec_list.append(vec)
         if len(vec_list)<max_len:
             for _ in range(max_len-len(vec_list)):
                 vec_list.append(pad)
@@ -63,10 +63,9 @@ with open(traindata, 'r', encoding='utf-8') as f:
     read = csv.reader(f)
     for row in read:
         x_train.append(chenge_text(row[1]))
-        y_train.append(int(row[class_explanation]))
+        y_train.append(int(row[0]))
 
 # テストデータの作成
-# test.txtをv0とv1に分割。
 x_test = []
 y_test = []
 with open(testdata,'r',encoding='utf-8') as f:
