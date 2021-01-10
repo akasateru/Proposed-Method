@@ -3,10 +3,10 @@
     "units":14,
     "epochs":20,
     "batch_size":4,
-    "diff_threshold":0.01,
+    "diff_threshold":0.05,
     "min_count":3000,
     "traindata":"../dataset/choiced_train_data.csv",
     "testdata":"../data/dbpedia/dbpedia_csv/test.csv",
-    "class_info":1,
+    "class_info":0,
     "": "class_info クラス名：0　wordnet：1"
 }

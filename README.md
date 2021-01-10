@@ -1,17 +1,13 @@
 - ファイル名:
-    - Proposed method 4.1
+    - Proposed method 5.0
 - 説明:
-    - wordnetを使用する
-    - ank1-rank2 > 0.01にする
+    - 情報源にほかのデータセットを入れない
 - 情報源領域:
-    - 20news:全文書
-    - dbpedia:train.csv, test.csv
-    - reuter:全文書
-    - yahootopic:train_pu_half_v0.txt, train_pu_half_v1.txt
+    - dbpedia:train.csv
 - 対象領域のクラス情報:
-    - wordnet
+    - クラス名
 - 学習データ選択方法:
-    - rank1-rank2 > 0.01
+    - rank1-rank2 > 0.05
     - 各クラス文書数：3000
 - 学習データ:
     - choiced_train_data.csv
