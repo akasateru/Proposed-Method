@@ -1,10 +1,10 @@
 - ファイル名:
-    - Proposed method 2.0
+    - Proposed method 3.0
 - 説明:
-    - 提案手法
+    - 情報源領域にdbpedia/test.csvを追加
 - 情報源領域:
     - 20news:全文書
-    - dbpedia:train.csv
+    - dbpedia:train.csv, test.csv
     - reuter:全文書
     - yahootopic:train_pu_half_v0.txt, train_pu_half_v1.txt
 - 対象領域のクラス情報:
