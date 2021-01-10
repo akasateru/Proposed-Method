@@ -1,5 +1,5 @@
 - ファイル名:
-    - Proposed method 3.0
+    - Proposed method 4.0
 - 説明:
     - 情報源領域にdbpedia/test.csvを追加
 - 情報源領域:
@@ -8,7 +8,7 @@
     - reuter:全文書
     - yahootopic:train_pu_half_v0.txt, train_pu_half_v1.txt
 - 対象領域のクラス情報:
-    - クラス名
+    - wordnet
 - 学習データ選択方法:
     - rank1-rank2 > 0.05
     - 各クラス文書数：3000
