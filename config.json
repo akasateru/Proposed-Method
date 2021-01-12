@@ -3,7 +3,7 @@
     "units":14,
     "epochs":20,
     "batch_size":4,
-    "diff_threshold":0.05,
+    "diff_threshold":0.01,
     "min_count":3000,
     "traindata":"../dataset/choiced_train_data.csv",
     "testdata":"../data/dbpedia/dbpedia_csv/test.csv",

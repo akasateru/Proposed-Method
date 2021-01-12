@@ -1,7 +1,8 @@
 - ファイル名:
-    - Proposed method 5.0
+    - Proposed method 5.1
 - 説明:
     - 情報源にほかのデータセットを入れない
+    - rank1-rank2 > 0.01
 - 情報源領域:
     - dbpedia:train.csv
 - 対象領域のクラス情報:
