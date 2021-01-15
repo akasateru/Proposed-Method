@@ -26,7 +26,8 @@ json_file = open('config.json', 'r')
 config = json.load(json_file)
 max_len = config['max_len']
 
-def docvec(row):
+# 前
+def docvec1(row):
     feature_vec = np.zeros((300,),dtype='float32') 
     row = row.replace("\n"," ")
     words = row.split(" ") 
@@ -39,6 +40,28 @@ def docvec(row):
                 count += 1
             except:
                 pass
+    if count == 0:
+        return feature_vec
+    else:
+        return feature_vec/count
+
+# 情報源の単語を1回だけ使う場合
+def docvec(row):
+    feature_vec = np.zeros((300,),dtype='float32')
+    word_stack = [] 
+    row = row.replace("\n"," ")
+    words = row.split(" ")
+    count = 0
+    for i,word in enumerate(words):
+        if i < max_len:
+            if word not in word_stack:
+                try: 
+                    vec = model.wv[word]
+                    feature_vec += vec
+                    word_stack.append(word)
+                    count += 1
+                except:
+                    pass
     if count == 0:
         return feature_vec
     else:
@@ -151,18 +174,13 @@ def yahootopic():
 
     return vec_list_yahootopic, text_list_yahootopic
 
-# vec_list_20news, text_list_20news = news20()
-# vec_list_dbpedia, text_list_dbpedia = dbpedia()
-# vec_list_reuter, text_list_reuter = reuter()
-# vec_list_yahootopic, text_list_yahootopic = yahootopic()
-
-# vec_list = vec_list_20news + vec_list_dbpedia + vec_list_reuter + vec_list_yahootopic
-# text_list = text_list_20news + text_list_dbpedia + text_list_reuter + text_list_yahootopic
-
+vec_list_20news, text_list_20news = news20()
 vec_list_dbpedia, text_list_dbpedia = dbpedia()
+vec_list_reuter, text_list_reuter = reuter()
+vec_list_yahootopic, text_list_yahootopic = yahootopic()
 
-vec_list = vec_list_dbpedia
-text_list = text_list_dbpedia
+vec_list = vec_list_20news + vec_list_dbpedia + vec_list_reuter + vec_list_yahootopic
+text_list = text_list_20news + text_list_dbpedia + text_list_reuter + text_list_yahootopic
 
 np.save('../dataset/sourcevec.npy',vec_list)
 with open('../dataset/source.txt','w',encoding='utf-8') as f:

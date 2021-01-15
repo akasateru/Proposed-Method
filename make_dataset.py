@@ -34,8 +34,8 @@ def pad_vec(x_list, max_len):
     x = []
     for doc in tqdm(x_list):
         vec_list = []
-        doc = doc.split(' ')
-        for word in doc:
+        doc1 = doc.split(' ')
+        for word in doc1:
             if len(vec_list) < max_len:
                 try:
                     vec = wv_model[word]
