@@ -102,18 +102,22 @@ with open('choicedatanum.txt','w',encoding='utf-8') as f:
     # 各クラスでmin_count数だけ取ってくる
 class_training_data = []
 for j,(stack_i,stack_diff) in tqdm(enumerate(zip(stack_i_list,stack_diff_list))):
-    if j == 5 or j == 9:
-        max_count = min_count_59
-    else:
-        max_count = min_count
     sorted_idx = np.argsort(stack_diff)[::-1]
     count = 0
     for s in sorted_idx:
-        if count < max_count:
-            class_training_data.append([j,source_text[stack_i[s]]])
-            count+=1
-        else :
-            break
+        if j == 5 or j == 9:
+            if count < min_count_59:
+                for _ in range(6):
+                    class_training_data.append([j,source_text[stack_i[s]]])
+                count+=1
+
+        else:
+            if count < min_count:
+                class_training_data.append([j,source_text[stack_i[s]]])
+                count+=1
+            else :
+                break
+        
     
 # 情報源領域から選択した学習データを出力
 with open('../dataset'+os.sep+'choiced_train_data.csv','w',encoding='utf-8') as f:
