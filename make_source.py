@@ -26,26 +26,7 @@ json_file = open('config.json', 'r')
 config = json.load(json_file)
 max_len = config['max_len']
 
-# 前
-def docvec1(row):
-    feature_vec = np.zeros((300,),dtype='float32') 
-    row = row.replace("\n"," ")
-    words = row.split(" ") 
-    count = 0
-    for i,word in enumerate(words):
-        if i < max_len:
-            try: 
-                vec = model.wv[word]
-                feature_vec += vec
-                count += 1
-            except:
-                pass
-    if count == 0:
-        return feature_vec
-    else:
-        return feature_vec/count
-
-# 情報源の単語を1回だけ使う場合
+# 情報源の単語を1回だけ使う
 def docvec(row):
     feature_vec = np.zeros((300,),dtype='float32')
     word_stack = [] 

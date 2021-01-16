@@ -21,6 +21,7 @@ config = json.load(json_file)
 max_len = config['max_len']
 diff_threshold = config['diff_threshold']
 min_count = config['min_count']
+min_count_59 = config['min_count_59']
 class_info = config['class_info']
 
 def docvec(row,max_len):
@@ -101,10 +102,14 @@ with open('choicedatanum.txt','w',encoding='utf-8') as f:
     # 各クラスでmin_count数だけ取ってくる
 class_training_data = []
 for j,(stack_i,stack_diff) in tqdm(enumerate(zip(stack_i_list,stack_diff_list))):
+    if j == 5 or j == 9:
+        max_count = min_count_59
+    else:
+        max_count = min_count
     sorted_idx = np.argsort(stack_diff)[::-1]
     count = 0
     for s in sorted_idx:
-        if count < min_count:
+        if count < max_count:
             class_training_data.append([j,source_text[stack_i[s]]])
             count+=1
         else :
