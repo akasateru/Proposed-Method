@@ -5,7 +5,7 @@
     "batch_size":4,
     "diff_threshold":0.05,
     "min_count":3000,
-    "min_count_59":500,
+    "min_count_59":1000,
     "traindata":"../dataset/choiced_train_data.csv",
     "testdata":"../data/dbpedia/dbpedia_csv/test.csv",
     "class_info":0,
