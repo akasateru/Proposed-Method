@@ -1,25 +1,13 @@
 - ファイル名:
-    - Proposed method 10.0
+    - Proposed method 11.0
 - 説明:
-    - 5と9の文書数だけ少なくした場合 
-    - 5と9の文書数：500*6
-- 情報源領域:
-    - 20news:全文書
-    - dbpedia:train.csv
-    - reuter:全文書
-    - yahootopic:train_pu_half_v0.txt, train_pu_half_v1.txt
-- 対象領域のクラス情報:
-    - クラス名
-- 学習データ選択方法:
-    - rank1-rank2 > 0.05
-    - 各クラス文書数：3000
-    - 5と9の文書数：500*6
+    - yahootopicで試した場合
 - 学習データ:
-    - choiced_train_data.csv
+    - data/yahootopic/train_pu_half_v1.txt
 - テストデータ:
-    - dbpedia/test.csv
+    - yahootopic/test.txt
 - パラメータ:
-    - max_len = 128
-    - units = 14
+    - max_len = 64
+    - units = 5
     - epochs = 20
     - batch_size = 4

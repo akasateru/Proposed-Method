@@ -1,13 +1,17 @@
 {
-    "max_len":128,
-    "units":14,
+    "max_len":64,
+    "units":5,
     "epochs":20,
     "batch_size":4,
     "diff_threshold":0.05,
     "min_count":3000,
-    "min_count_59":500,
-    "traindata":"../dataset/choiced_train_data.csv",
-    "testdata":"../data/dbpedia/dbpedia_csv/test.csv",
+    "min_count_59":3000,
+    "traindata":"../data/yahootopic/train_pu_half_v1.txt",
+    "":"../dataset/choiced_train_data.csv | ../data/yahootopic/train_pu_half_v1.txt",
+    "testdata":"../data/yahootopic/test.txt",
+    "":"../data/dbpedia/dbpedia_csv/test.csv | ../data/yahootopic/test.txt",
+    "testclass":1,
+    "":"# 10 or 1 or 0",
     "class_info":0,
-    "": "class_info クラス名：0　wordnet：1"
+    "": "クラス名：0　wordnet：1"
 }
