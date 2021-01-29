@@ -11,6 +11,7 @@ import os
 from sklearn import metrics
 from sklearn.metrics import recall_score, precision_score, f1_score, accuracy_score
 import json
+import pickle
 
 # 要確認
 json_file = open('config.json','r')
@@ -18,15 +19,23 @@ config = json.load(json_file)
 units =  config['units'] #クラス数
 batch_size = config['batch_size']
 
-model = load_model('testcnn.h5')
+model = load_model('textcnn.h5')
 
-x_test = np.load('../dataset/test/x_test.npy')
-y_test = np.load('../dataset/test/y_test.npy')
+# x_test = np.load('../dataset/test/x_test.npy')
+# y_test = np.load('../dataset/test/y_test.npy')
+
+fout = open('../dataset/test/x_test.npy','rb')
+x_test = np.array(pickle.load(fout))
+fout.close()
+fout = open('../dataset/test/y_test.npy','rb')
+y_test = np.array(pickle.load(fout))
+fout.close()
 
 print(x_test.shape)
 print(y_test.shape)
 
 y_pred = model.predict(x_test)
+print(y_pred[0])
 
 score = model.evaluate(x=[x_test], y=[y_test],batch_size=batch_size)
 print("Loss:",score[0])

@@ -12,6 +12,7 @@ from sklearn import metrics
 from sklearn.metrics import recall_score, precision_score, f1_score, accuracy_score
 import keras
 import json
+import pickle
 
 # 要確認
 json_file = open('config.json','r')
@@ -39,10 +40,23 @@ model = Model(inputs, output)
 opt = Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=1e-07, decay=0.0, amsgrad=True)
 model.compile(loss="categorical_crossentropy", optimizer=opt,metrics=["accuracy"])
 
-x_train = np.load('../dataset/train/x_train.npy')
-y_train = np.load('../dataset/train/y_train.npy')
-x_test = np.load('../dataset/test/x_test.npy')
-y_test = np.load('../dataset/test/y_test.npy')
+fout = open('../dataset/train/x_train.npy','rb')
+x_train = np.array(pickle.load(fout))
+fout.close()
+fout = open('../dataset/train/y_train.npy','rb')
+y_train = np.array(pickle.load(fout))
+fout.close()
+fout = open('../dataset/test/x_test.npy','rb')
+x_test = np.array(pickle.load(fout))
+fout.close()
+fout = open('../dataset/test/y_test.npy','rb')
+y_test = np.array(pickle.load(fout))
+fout.close()
+
+# x_train = np.load('../dataset/train/x_train.npy')
+# y_train = np.load('../dataset/train/y_train.npy')
+# x_test = np.load('../dataset/test/x_test.npy')
+# y_test = np.load('../dataset/test/y_test.npy')
 
 result = model.fit(x=x_train,
                    y=y_train,
@@ -61,5 +75,5 @@ plt.ylabel('acc')
 plt.legend()
 plt.savefig('plt.jpg')
 
-model.save('testcnn.h5')
+model.save('textcnn.h5')
 
