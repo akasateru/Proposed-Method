@@ -1,7 +1,7 @@
 - ファイル名:
-    - Proposed method 13.0
+    - Proposed method 14.0
 - 説明:
-    - yahootopicのbatch_size=16で試す
+    - yahootopicのbatch_size=32で試す
 <!-- - 情報源領域:
     - 20news:全文書
     - dbpedia:train.csv
@@ -23,4 +23,4 @@
     - max_len = 128
     - units = 5
     - epochs = 20
-    - batch_size = 16
+    - batch_size = 32
