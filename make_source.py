@@ -155,13 +155,15 @@ def yahootopic():
 
     return vec_list_yahootopic, text_list_yahootopic
 
-vec_list_20news, text_list_20news = news20()
+# vec_list_20news, text_list_20news = news20()
 vec_list_dbpedia, text_list_dbpedia = dbpedia()
-vec_list_reuter, text_list_reuter = reuter()
-vec_list_yahootopic, text_list_yahootopic = yahootopic()
+# vec_list_reuter, text_list_reuter = reuter()
+# vec_list_yahootopic, text_list_yahootopic = yahootopic()
 
-vec_list = vec_list_20news + vec_list_dbpedia + vec_list_reuter + vec_list_yahootopic
-text_list = text_list_20news + text_list_dbpedia + text_list_reuter + text_list_yahootopic
+# vec_list = vec_list_20news + vec_list_dbpedia + vec_list_reuter + vec_list_yahootopic
+# text_list = text_list_20news + text_list_dbpedia + text_list_reuter + text_list_yahootopic
+vec_list = vec_list_dbpedia
+text_list = text_list_dbpedia
 
 np.save('../dataset/sourcevec.npy',vec_list)
 with open('../dataset/source.txt','w',encoding='utf-8') as f:
