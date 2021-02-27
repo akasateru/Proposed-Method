@@ -75,29 +75,11 @@ def news20():
     return vec_list_20news, text_list_20news
 
 def dbpedia():
-    #train.csv
-    with open('../data'+os.sep+'dbpedia'+os.sep+'dbpedia_csv'+os.sep+'train.csv','r',encoding='utf-8') as f:
-        reader = csv.reader(f)
-        vec_list_dbpedia = []
-        text_list_dbpedia = []
-        l = len(list(reader))
-        f.seek(0)
-        for row in tqdm(reader,total=l):
-            text_stock = []
-            text = row[2][1:].replace('(',')').split(')')
-            for i,t in enumerate(text):
-                if i % 2 == 0:
-                    text_stock.append(t)
-            text = ''.join(text_stock)
-            text = chenge_text(text)
-            text = ' '.join([x for x in text.split(' ') if x not in row[1].split(' ')])
-            text = text.replace('  ',' ')
-            vec_list_dbpedia.append(docvec(text))
-            text_list_dbpedia.append(text)
-
-    # test.csv
-    # with open('../data'+os.sep+'dbpedia'+os.sep+'dbpedia_csv'+os.sep+'test.csv','r',encoding='utf-8') as f:
+    # #train.csv
+    # with open('../data'+os.sep+'dbpedia'+os.sep+'dbpedia_csv'+os.sep+'train.csv','r',encoding='utf-8') as f:
     #     reader = csv.reader(f)
+    #     vec_list_dbpedia = []
+    #     text_list_dbpedia = []
     #     l = len(list(reader))
     #     f.seek(0)
     #     for row in tqdm(reader,total=l):
@@ -112,6 +94,26 @@ def dbpedia():
     #         text = text.replace('  ',' ')
     #         vec_list_dbpedia.append(docvec(text))
     #         text_list_dbpedia.append(text)
+
+    # test.csv
+    with open('../data'+os.sep+'dbpedia'+os.sep+'dbpedia_csv'+os.sep+'test.csv','r',encoding='utf-8') as f:
+        reader = csv.reader(f)
+        l = len(list(reader))
+        f.seek(0)
+        vec_list_dbpedia = []
+        text_list_dbpedia = []
+        for row in tqdm(reader,total=l):
+            text_stock = []
+            text = row[2][1:].replace('(',')').split(')')
+            for i,t in enumerate(text):
+                if i % 2 == 0:
+                    text_stock.append(t)
+            text = ''.join(text_stock)
+            text = chenge_text(text)
+            text = ' '.join([x for x in text.split(' ') if x not in row[1].split(' ')])
+            text = text.replace('  ',' ')
+            vec_list_dbpedia.append(docvec(text))
+            text_list_dbpedia.append(text)
     return vec_list_dbpedia, text_list_dbpedia
     
 def reuter():

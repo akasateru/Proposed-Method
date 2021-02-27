@@ -1,7 +1,7 @@
 - ファイル名:
-    - Proposed method 15.0
+    - Proposed method 16.0
 - 説明:
-    - 情報源領域にdbpedia/train.csvのみ使用した場合
+    - 情報源領域にdbpedia/test.csvのみ使用した場合
 - 情報源領域:
     <!-- - 20news:全文書 -->
     - dbpedia:train.csv
