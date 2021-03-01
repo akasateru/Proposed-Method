@@ -1,12 +1,12 @@
 - ファイル名:
-    - Proposed method 16.0
+    - Proposed method 17.0
 - 説明:
-    - 情報源領域にdbpedia/test.csvのみ使用した場合
+    - 提案手法のやり直し
 - 情報源領域:
-    <!-- - 20news:全文書 -->
+    - 20news:全文書
     - dbpedia:train.csv
-    <!-- - reuter:全文書 -->
-    <!-- - yahootopic:train_pu_half_v0.txt, train_pu_half_v1.txt -->
+    - reuter:全文書
+    - yahootopic:train_pu_half_v0.txt, train_pu_half_v1.txt
 - 対象領域のクラス情報:
     - クラス名
 - 学習データ選択方法:
