@@ -1,7 +1,8 @@
 - ファイル名:
-    - Proposed method 17.0
+    - Proposed method 18.0
 - 説明:
-    - 提案手法のやり直し
+    - 選択された学習データとクラス名をT-SNEにより可視化。
+    - 混同行列を出力。
 - 情報源領域:
     - 20news:全文書
     - dbpedia:train.csv
@@ -12,13 +13,10 @@
 - 学習データ選択方法:
     - rank1-rank2 > 0.05
 - 各クラス文書数：3000
-- 5と9の文書数：3000
 - 学習データ:
     - choiced_train_data.csv
-    <!-- - yahootopic/train_pu_half_v1.txt -->
 - テストデータ:
     - dbpedia/test.csv
-    <!-- - yahootopic/test.txt -->
 - パラメータ:
     - max_len = 128
     - units = 14

@@ -21,7 +21,6 @@ config = json.load(json_file)
 max_len = config['max_len']
 diff_threshold = config['diff_threshold']
 min_count = config['min_count']
-min_count_59 = config['min_count_59']
 class_info = config['class_info']
 
 def docvec(row,max_len):
@@ -67,7 +66,6 @@ for source_v in tqdm(sourcevec):
         vec2 = class_v
         cos = np.sum((vec1*vec2)/(np.linalg.norm(vec1)*np.linalg.norm(vec2)))
         cos_list.append(cos)
-    cos_s = np.sort(np.array(cos_list))[::-1]
     cos_si = np.argsort(cos_list)[::-1]
     rank1 = cos_list[cos_si[0]]
     rank2 = cos_list[cos_si[1]]
@@ -75,7 +73,7 @@ for source_v in tqdm(sourcevec):
     choice_list.append(cos_si[0])
     diff_list.append(diff)
 
-    # 差の大きいものから順に選択
+# 閾値を超えた場合ランキング1位のクラスの学習データとして選択
 for num in tqdm(range(len(target_class))):
     stack_i = []
     stack_diff = []
@@ -89,6 +87,7 @@ for num in tqdm(range(len(target_class))):
     stack_i_list.append(stack_i)
     stack_diff_list.append(stack_diff)
 
+# 各クラスの選択された文書数をファイルに出力
 choicedatanum = []
 choicedatanum.append('各クラスの選択された文書数')
 for j,i in enumerate(stack_i_list):
@@ -99,25 +98,17 @@ choicedatanum.append('各クラスの最大文書数:'+str(min_count))
 with open('choicedatanum.txt','w',encoding='utf-8') as f:
     f.write('\n'.join(choicedatanum))
 
-    # 各クラスでmin_count数だけ取ってくる
+# 各クラスで1位と2位の差が大きい順にmin_count数だけ取得
 class_training_data = []
 for j,(stack_i,stack_diff) in tqdm(enumerate(zip(stack_i_list,stack_diff_list))):
     sorted_idx = np.argsort(stack_diff)[::-1]
     count = 0
     for s in sorted_idx:
-        if j == 5 or j == 9:
-            if count < min_count_59:
-                for _ in range(6):
-                    class_training_data.append([j,source_text[stack_i[s]]])
-                count+=1
-
-        else:
-            if count < min_count:
-                class_training_data.append([j,source_text[stack_i[s]]])
-                count+=1
-            else :
-                break
-        
+        if count < min_count:
+            class_training_data.append([j,source_text[stack_i[s]]])
+            count+=1
+        else :
+            break
     
 # 情報源領域から選択した学習データを出力
 with open('../dataset'+os.sep+'choiced_train_data.csv','w',encoding='utf-8') as f:
