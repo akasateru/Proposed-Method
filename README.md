@@ -1,8 +1,10 @@
 - ファイル名:
-    - Proposed method 18.0
+    - Proposed method 19.0
+- 注意:
+    - TextCNNのモデルは容量が大きすぎるため別で保存
 - 説明:
-    - 選択された学習データとクラス名をT-SNEにより可視化。
-    - 混同行列を出力。
+    - "Kerasで可変長系列をEmbeddingしてLSTMに入力するときはmask_zero=Trueにする。
+    - https://qiita.com/hrappuccino/items/f66abebe60f8ea7826d5"
 - 情報源領域:
     - 20news:全文書
     - dbpedia:train.csv

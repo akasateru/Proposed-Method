@@ -73,22 +73,7 @@ for y_p in y_pred:
 y_pred_onehot = np.array(y_pred_list)
 
 # 混同行列を書き出し
-labels = [
-    'Com.',
-    'Edu.',
-    'Art.',
-    'Ath.',
-    'Off.',
-    'Mea.',
-    'Bui.',
-    'Nat.',
-    'Vil.',
-    'Ani.',
-    'Pla.',
-    'Alb.',
-    'Fil.',
-    'Wri.'
-]
+labels = ['Com.','Edu.','Art.','Ath.','Off.','Mea.','Bui.', 'Nat.','Vil.','Ani.','Pla.','Alb.','Fil.','Wri.']
 y_test_int = np.argmax(y_test,axis=1)
 y_pred_int = np.argmax(y_pred,axis=1)
 mat = metrics.confusion_matrix(y_test_int,y_pred_int)
